@@ -31,4 +31,12 @@ public class BrandController {
     public RespBrand getBrandById(@PathVariable Long id) {
         return brandService.getBrandById(id);
     }
+    @PutMapping(path = "{id}")
+    public RespBrand updateBrand(@PathVariable Long id, @Valid @RequestBody ReqBrand reqBrand) {
+        return brandService.updateBrandById(id,reqBrand);
+    }
+    @DeleteMapping(path = "{id}")
+    public void deleteBrand(@PathVariable Long id) {
+         brandService.deleteBrandById(id);
+    }
 }

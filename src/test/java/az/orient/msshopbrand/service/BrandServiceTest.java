@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -41,6 +42,7 @@ class BrandServiceTest {
 
         RespBrand respBrand=brandService.updateBrandById(brandId,rb);
         assertNotNull(respBrand);
+        verify(brandRepository, Mockito.times(1)).save(brandEntity);
     }
     @Test
     void updateBrandGivenInvalidIdThenReturn404(){
