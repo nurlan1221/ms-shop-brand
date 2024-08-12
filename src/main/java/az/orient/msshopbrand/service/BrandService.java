@@ -39,4 +39,10 @@ public class BrandService {
         brandEntity.setStatus(Status.DELETED);
         brandRepository.save(brandEntity);
     }
+    public RespBrand updateBrandById(Long id, ReqBrand brand) {
+        BrandEntity brandEntity=brandRepository.findByIdAndStatus(id,Status.ACTIVE).orElseThrow(() -> new BrandNotFoundException("Brand not found with id: " + id));
+        BrandEntity savedEntity=BrandMapper.INSTANCE.updateBrandEntity(brand,brandEntity);
+        BrandEntity saved=brandRepository.save(savedEntity);
+        return BrandMapper.INSTANCE.brandEntityToRespBrand(saved);
+    }
 }
