@@ -28,7 +28,7 @@ public class BrandController {
     }
 
     @GetMapping(path = "{id}")
-    public RespBrand getBrandById(Long id) {
+    public RespBrand getBrandById(@PathVariable Long id) {
         return brandService.getBrandById(id);
     }
 }
