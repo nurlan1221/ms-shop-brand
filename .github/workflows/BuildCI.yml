@@ -24,7 +24,7 @@ jobs:
         run: ./gradlew build
 
       - name: Start MySQL Service
-        uses: mysql-actions/setup-mysql@v2
+        uses: samin/mysql-action@v1
         with:
           mysql-version: '8.0'
           mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
