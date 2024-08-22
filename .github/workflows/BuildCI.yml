@@ -26,7 +26,6 @@ jobs:
       - name: Start MySQL Service
         uses: samin/mysql-action@v1
         with:
-          mysql-version: '8.0'
           mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           mysql-database: branddb
 
