@@ -23,6 +23,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Start MySQL Service
+        uses: mysql-actions/setup-mysql@v2
+        with:
+          mysql-version: '8.0'
+          mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          mysql-database: branddb
+
       - name: JaCoCo Code Coverage Report
         id: jacoco_reporter
         uses: PavanMudigonda/jacoco-reporter@v5.0
