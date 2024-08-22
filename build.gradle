@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.2'
     id 'io.spring.dependency-management' version '1.1.6'
-    id 'jacoco'
 }
 
 group = 'az.orient'
@@ -14,9 +13,7 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
-jacoco {
-    toolVersion = "0.8.11"
-}
+
 
 repositories {
     mavenCentral()
@@ -43,12 +40,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
 }
-jacocoTestReport {
-    dependsOn test
-    reports {
-        xml.required = true
-        html.required = true
-    }
-}
+
