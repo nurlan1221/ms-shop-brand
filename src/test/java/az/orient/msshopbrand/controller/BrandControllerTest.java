@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -19,8 +21,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@WebMvcTest
 @ExtendWith(MockitoExtension.class)
+@WebMvcTest(controllers = BrandController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class BrandControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -100,11 +103,12 @@ class BrandControllerTest {
         assertEquals(mvcResult.getResponse().getStatus(), 200);
         verify(brandService).deleteBrandById(id);
     }
+
     @Test
-    void deleteBrandGivenInvalidIdAndThenReturn404() throws Exception{
-        Long id=1L;
+    void deleteBrandGivenInvalidIdAndThenReturn404() throws Exception {
+        Long id = 1L;
         doThrow(new BrandNotFoundException("Brand not found with id: 1")).when(brandService).deleteBrandById(id);
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.delete("/brands/" + id)).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/brands/" + id)).andReturn();
         assertEquals(mvcResult.getResponse().getStatus(), 404);
         verify(brandService).deleteBrandById(id);
     }
